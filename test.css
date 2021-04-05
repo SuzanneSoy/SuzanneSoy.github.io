@@ -1,5 +1,5 @@
 html { position: relative; padding:0; }
-html, body { height: 100%; }
+html, body { height: 100%; overflow: hidden; }
 
 .scene {
     position: absolute;
