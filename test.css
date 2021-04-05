@@ -1,0 +1,132 @@
+html { position: relative; padding:0; }
+html, body { height: 100%; }
+
+.scene {
+    position: absolute;
+    perspective: 100vmin;
+    opacity: 0.9;
+    top: 50%;
+    left: 50%;
+    width: 100vmin;
+    height: 100vmin;
+    transform: translate(-50%, -50%) scale(1);
+    font-size: x-large;
+}
+
+.scene .scene {
+    transform: translate(-50%, -50%) scale(0.9);
+    overflow: hidden;
+    border: thin solid blue;
+}
+
+.scene .test2 .scene { transform: translate(-50%, -50%) scale(0.25); }
+
+.three-d {
+    position: absolute;
+    border: thin solid red;
+    background: pink;
+    transition: transform ease 2s;
+    transform-style: preserve-3d;
+    top: 50%;
+    left: 50%;
+}
+
+:root {
+    --origin: translate3d(-50%, -50%, -50vmin);
+    --origin-: translate3d(50%, 50%, 50vmin);
+}
+
+:root {
+    --test: translate3d(-49vmin, 0vmin, 0vmin) rotateY(90deg) scale(0.6);
+    --test-: rotateY(-90deg) translate3d(49vmin, 0vmin, 0vmin);
+    --test-hover: translate3d(0vmin,0,50vmin) rotateY(0deg) scale(1);
+}
+
+.test { width: 90vmin; height: 90vmin; transform: var(--origin)  var(--test); }
+.test:hover { transform: var(--origin) var(--test-hover); }
+
+:root {
+    --test2: translate3d(49vmin, 0vmin, 0vmin) rotateY(-90deg);
+    --test2-: rotateY(90deg) translate3d(-49vmin, 0vmin, 0vmin);
+    --test2-hover: translate3d(0,0,50vmin) rotateY(0deg);
+}
+
+:root {
+    --opacity: 1;
+}
+
+.test2 { width: 50vmin; height: 25vmin; transform: var(--origin) var(--test2); opacity: var(--opacity); }
+.test2:hover { transform: var(--origin) var(--test2-hover) scale(2); }
+
+.hover { z-index: 20; }
+.hover:hover { z-index: 30; }
+
+.hover .hover { z-index: 40; }
+.hover:hover .hover:hover { z-index: 50; }
+
+.wall-l { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateX(-50vmin) rotateY(90deg); }
+.wall-r { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateX(50vmin)  rotateY(90deg); }
+.wall-u { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateY(-50vmin) rotateX(90deg); }
+.wall-d { opacity: 0.7; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateY(50vmin)  rotateX(90deg); }
+.wall-b { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateZ(-50vmin); }
+.wall-f { opacity: 0.1; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateZ(50vmin);
+          pointer-events: none; }
+
+.wall { pointer-events: none; }
+
+@keyframes turntable {
+    0% { transform: rotateY(0); }
+    100% { transform: rotateY(360); }
+}
+
+.room { transform: translate3d(0,0,0) rotate(0); }
+.room-test:hover ~ .room { transform: var(--origin) var(--test-hover) var(--test-) var(--origin-); }
+.room-test:hover ~ .room .test2 {
+    /*animation: fadeOut 1s;*/
+    opacity: 0;
+    left: 999px;
+    transition: translate 2s, opacity 1s, left step-end 1s;
+}
+.room .test2 { transition: transform ease 2s, opacity 1s linear 1s, left step-end 1s; }
+.room-test2:hover ~ .room { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
+/* .room { animation: 4s turntable infinite; } */
+/* .room { } */
+/*.room * { pointer-events: none; }*/
+
+:root {
+    --rainbow-saturation: 80%;
+    --rainbow-lightness: 40%;
+    --rainbow: linear-gradient(
+        45deg,
+        hsl(0,   var(--rainbow-saturation), var(--rainbow-lightness)) 0%,
+        hsl(36,  var(--rainbow-saturation), var(--rainbow-lightness)) 10%,
+        hsl(72,  var(--rainbow-saturation), var(--rainbow-lightness)) 20%,
+        hsl(108, var(--rainbow-saturation), var(--rainbow-lightness)) 30%,
+        hsl(144, var(--rainbow-saturation), var(--rainbow-lightness)) 40%,
+        hsl(180, var(--rainbow-saturation), var(--rainbow-lightness)) 50%,
+        hsl(216, var(--rainbow-saturation), var(--rainbow-lightness)) 60%,
+        hsl(252, var(--rainbow-saturation), var(--rainbow-lightness)) 70%,
+        hsl(288, var(--rainbow-saturation), var(--rainbow-lightness)) 80%,
+        hsl(324, var(--rainbow-saturation), var(--rainbow-lightness)) 90%,
+        hsl(360, var(--rainbow-saturation), var(--rainbow-lightness)) 100%)
+}
+
+.rest { position: absolute; top: 0; left: 0; bottom: 0; right: 0;}
+.scene:hover > .rest:not(:hover) ~ .room.room-test:not(:hover) { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
+.scene:hover > .rest:not(:hover) ~ .room:not(:hover) .test { opacity: 0; left: 999px; transition: translate 2s, opacity 1s, left step-end 1s; }
+.room .test { transition: transform ease 2s, opacity 1s linear 1s, left step-end 1s; }
+
+.object:hover:before {
+    opacity: 1;
+}
+.object:before {
+    content: "← back";
+    border: thin solid brown;
+    background: white;
+    z-index: 999;
+    position: absolute;
+    transform: translate(0, -100%);
+    opacity: 0;
+    transition: opacity 1s linear 1s;
+    pointer-events: none;
+}
