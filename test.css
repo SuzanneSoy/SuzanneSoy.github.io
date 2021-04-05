@@ -9,17 +9,17 @@ html, body { height: 100%; overflow: hidden; }
     left: 50%;
     width: 100vmin;
     height: 100vmin;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate3d(-50%, -50%, 0) scale(1);
     font-size: x-large;
 }
 
 .scene .scene {
-    transform: translate(-50%, -50%) scale(0.9);
+    transform: translate3d(-50%, -50%, 0) scale(0.9);
     overflow: hidden;
     border: thin solid blue;
 }
 
-.scene .test2 .scene { transform: translate(-50%, -50%) scale(0.25); }
+.scene .test2 .scene { transform: translate3d(-50%, -50%, 0) scale(0.25); }
 
 .three-d {
     position: absolute;
@@ -64,12 +64,12 @@ html, body { height: 100%; overflow: hidden; }
 .hover .hover { z-index: 40; }
 .hover:hover .hover:hover { z-index: 50; }
 
-.wall-l { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateX(-50vmin) rotateY(90deg); }
-.wall-r { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateX(50vmin)  rotateY(90deg); }
-.wall-u { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateY(-50vmin) rotateX(90deg); }
-.wall-d { opacity: 0.7; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateY(50vmin)  rotateX(90deg); }
-.wall-b { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateZ(-50vmin); }
-.wall-f { opacity: 0.1; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translateZ(50vmin);
+.wall-l { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(-50vmin, 0, 0) rotateY(90deg); }
+.wall-r { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(50vmin, 0, 0)  rotateY(90deg); }
+.wall-u { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(0, -50vmin, 0) rotateX(90deg); }
+.wall-d { opacity: 0.7; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(0, 50vmin, 0)  rotateX(90deg); }
+.wall-b { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(0, 0, -50vmin); }
+.wall-f { opacity: 0.1; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(0, 0, 50vmin);
           pointer-events: none; }
 
 .wall { pointer-events: none; }
@@ -84,7 +84,7 @@ html, body { height: 100%; overflow: hidden; }
 .room-test:hover ~ .room .test2 {
     /*animation: fadeOut 1s;*/
     opacity: 0;
-    left: 999px;
+    left: 9999vmin;
     transition: translate 2s, opacity 1s, left step-end 1s;
 }
 .room .test2 { transition: transform ease 2s, opacity 1s linear 1s, left step-end 1s; }
@@ -125,7 +125,7 @@ html, body { height: 100%; overflow: hidden; }
     background: white;
     z-index: 999;
     position: absolute;
-    transform: translate(0, -100%);
+    transform: translate3d(0, -100%, 0);
     opacity: 0;
     transition: opacity 1s linear 1s;
     pointer-events: none;
