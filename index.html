@@ -3,85 +3,118 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Suzanne Soy’s page</title>
+    <script src="target-within-shim.js"></script>
     <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="3d.css">
 </head>
 <body>
     <h1>Suzanne Soy</h1>
     <h2>Procedural Designer</h2>
     <p>Latest version of my <a href="https://jsmaniac.github.io/phc-thesis/phc-thesis/">Ph.D draft</a></p>
-    <div class="scene">
-        <div class="rest"></div>
-        <div class="three-d room hover room-test">
-            <div class="three-d object test" id="test">Hello world
-                <div class="scene">
-                    <div class="rest"></div>
-                    <div class="three-d room hover room-test">
-                        <div class="three-d object test" id="test">It's turtles all the way down!
-                            <div class="scene">
-                                <div class="rest"></div>
-                                <div class="three-d room hover room-test">
-                                    <div class="three-d object test">
-                                        <iframe
-                                            style="width:100%; height:90%;"
-                                            src="table.js"></iframe>
+    <div class="css3d" style="display: none;">
+        <div tabindex="0" id="a">
+            A
+            <div tabindex="0" id="a1">
+                A1
+                <iframe srcdoc="<h1>title</h1>"></iframe>
+            </div>
+            <div tabindex="0" id="a2">
+                A2
+            </div>
+        </div>
+        <div tabindex="0" id="b">
+            B
+        </div>
+    </div>
+    <div class="view3d" style="display:one">
+        <div class="scene">
+            <div class="rest"></div>
+            <div tabindex="0" class="three-d room hover room-test">
+                <div class="three-d object test" id="hello">Hello world
+                    <a class="go" href="#hello">→ hello</a>
+                    <div class="scene">
+                        <div class="rest"></div>
+                        <div tabindex="0" class="three-d room hover room-test">
+                            <div class="three-d object test" id="turtles">It's turtles all the way down!
+                                <a class="go" href="#turtles">→ turtles</a>
+                                <div class="scene">
+                                    <div class="rest"></div>
+                                    <div tabindex="0" class="three-d room hover room-test">
+                                        <div class="three-d object test" id="table.js">
+                                            <a class="go" href="#table.js">→ table editor</a>
+                                            <iframe
+                                                style="width:100%; height:90%;"
+                                                src="table.js"></iframe>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="three-d room hover room-test2">
-                                    <div class="three-d object test2">Don't use CSS to do this.</div>
-                                </div>
-                                <div class="three-d room">
-                                    <div class="three-d wall wall-l"></div>
-                                    <div class="three-d wall wall-r"></div>
-                                    <div class="three-d wall wall-u"></div>
-                                    <div class="three-d wall wall-d"></div>
-                                    <div class="three-d wall wall-b"></div>
-                                    <div class="three-d wall wall-f"></div>
+                                    <div tabindex="0" class="three-d room hover room-test2">
+                                        <div class="three-d object test2" id="css-only-virtual-world">
+                                            <a class="go" href="#css-only-virtual-world">→ useful tip</a>
+                                            Don't use CSS to do this.</div>
+                                    </div>
+                                    <div class="three-d room">
+                                        <div class="three-d wall wall-l"></div>
+                                        <div class="three-d wall wall-r"></div>
+                                        <div class="three-d wall wall-u"></div>
+                                        <div class="three-d wall wall-d"></div>
+                                        <div class="three-d wall wall-b"></div>
+                                        <div class="three-d wall wall-f"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="three-d room hover room-test2">
-                        <div class="three-d object test2">Nested rooms!</div>
-                    </div>
-                    <div class="three-d room">
-                        <div class="three-d wall wall-l"></div>
-                        <div class="three-d wall wall-r"></div>
-                        <div class="three-d wall wall-u"></div>
-                        <div class="three-d wall wall-d"></div>
-                        <div class="three-d wall wall-b"></div>
-                        <div class="three-d wall wall-f"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="three-d room hover room-test2">
-            <div class="three-d object test2">Mental palace
-                <div class="scene">
-                    <div class="rest"></div>
-                    <div class="three-d room hover room-test">
-                        <div class="three-d object test" id="test">Oh my…</div>
-                    </div>
-                    <div class="three-d room hover room-test2">
-                        <div class="three-d object test2" id="test2">It's full of &lt;div&gt;s</div>
-                    </div>
-                    <div class="three-d room">
-                        <div class="three-d wall wall-l"></div>
-                        <div class="three-d wall wall-r"></div>
-                        <div class="three-d wall wall-u"></div>
-                        <div class="three-d wall wall-d"></div>
-                        <div class="three-d wall wall-b"></div>
-                        <div class="three-d wall wall-f"></div>
+                        <div tabindex="0" class="three-d room hover room-test2">
+                            <div class="three-d object test2" id="nested-rooms">
+                                <a class="go" href="#nested-rooms">→ nested-rooms</a>
+                                Nested rooms!
+                            </div>
+                        </div>
+                        <div class="three-d room">
+                            <div class="three-d wall wall-l"></div>
+                            <div class="three-d wall wall-r"></div>
+                            <div class="three-d wall wall-u"></div>
+                            <div class="three-d wall wall-d"></div>
+                            <div class="three-d wall wall-b"></div>
+                            <div class="three-d wall wall-f"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="three-d room">
-            <div class="three-d wall wall-l"></div>
-            <div class="three-d wall wall-r"></div>
-            <div class="three-d wall wall-u"></div>
-            <div class="three-d wall wall-d"></div>
-            <div class="three-d wall wall-b"></div>
-            <div class="three-d wall wall-f"></div>
+            <div tabindex="0" class="three-d room hover room-test2">
+                <div class="three-d object test2" id="mental-palace">Mental palace
+                    <a class="go" href="#mental-palace">→ mental-palace</a>
+                    <div class="scene">
+                        <div tabindex="0" class="three-d room hover room-test">
+                            <div class="three-d object test" id="mental-palace-2001">
+                                <a class="go" href="#mental-palace-2001"></a>
+                                Oh my…
+                            </div>
+                        </div>
+                        <div tabindex="0" class="three-d room hover room-test2">
+                            <div class="three-d object test2" id="mental-palace-stars">
+                                <a class="go" href="#mental-palace-stars"></a>
+                                It's full of &lt;div&gt;s
+                            </div>
+                        </div>
+                        <div class="three-d room">
+                            <div class="three-d wall wall-l"></div>
+                            <div class="three-d wall wall-r"></div>
+                            <div class="three-d wall wall-u"></div>
+                            <div class="three-d wall wall-d"></div>
+                            <div class="three-d wall wall-b"></div>
+                            <div class="three-d wall wall-f"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="three-d room">
+                <div class="three-d wall wall-l"></div>
+                <div class="three-d wall wall-r"></div>
+                <div class="three-d wall wall-u"></div>
+                <div class="three-d wall wall-d"></div>
+                <div class="three-d wall wall-b"></div>
+                <div class="three-d wall wall-f"></div>
+            </div>
         </div>
     </div>
 </body>

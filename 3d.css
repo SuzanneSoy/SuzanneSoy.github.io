@@ -1,0 +1,57 @@
+html { position: relative; padding:0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+
+.css3d {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    bottom: 10%;
+    right: 10%;
+}
+.css3d div {
+    width: 40%;
+    height: 40%;
+    border: thin solid red;
+    background: pink;
+    position: absolute;    
+}
+.css3d div:nth-child(1) { top: 5%; left: 5%; }
+.css3d div:nth-child(2) { bottom: 5%; right: 5%; }
+
+.css3d #a1:after {
+    content: 'BEFOR';
+    display: block;
+    border: thin solid green;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    z-index: 3;
+    background: white;
+    pointer-events: all;
+ }
+ .css3d #a1:after:hover {
+    border: 20px solid black;
+    background: blue;
+ }
+
+.css3d iframe { width: 50%; height: 50%; }
+
+.css3d div:focus-within {
+    border: thick solid blue;
+}
+
+.css3d div:active:after {
+    content:'active';
+}
+
+.css3d div:target {
+    background: plum;
+}
+
+.css3d div:target-within {
+    border-style: dashed;
+}
+.css3d div.target-within {
+    border-style: dashed;
+}
