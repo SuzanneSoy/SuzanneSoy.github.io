@@ -135,15 +135,43 @@ html, body { height: 100%; }
       position: absolute; top: 0; bottom: 0; left:0; right: 0; display: flex; align-items: center; justify-content: center;
       transition: background 0.6s, translate 2s, left step-start 1s; transform-style: preserve-3d; }
 .go::before { position: absolute; content: ''; left: 0; right: 0; height: 1.5em; z-index: -1;
-              background: white; transition: background 0.2s; }
+              background: blueviolet; transition: background 0.2s; }
 .go:hover::before { background: rgba(255, 255, 255, 0.6); }
 .go:hover { background: rgba(255, 255, 255, 0.1); }
-:target-within > .go { background: rgba(255, 255, 255, 0.0); color: rgba(0, 0, 0, 0); left: 9999vmin; transition: background 0.6s, translate 2s, left step-end 1s; }
-.target-within > .go { background: rgba(255, 255, 255, 0.0); color: rgba(0, 0, 0, 0); left: 9999vmin; transition: background 0.6s, translate 2s, left step-end 1s; }
-:target-within > .go::before { background: rgba(255, 255, 255, 0.0); color: rgba(0, 0, 0, 0); left: 9999vmin; }
-.target-within > .go::before { background: rgba(255, 255, 255, 0.0); }
-:target-within > .go::after { --distance: calc(0 - var(--width)) !important; left: 9999vmin; transition: background 0.6s var(--ease-out-bounce), transform 1s var(--ease-out-bounce), left 1s step-end; }
-.target-within > .go::after { --distance: calc(0 - var(--width)) !important; left: 9999vmin; transition: background 0.6s var(--ease-out-bounce), transform 1s var(--ease-out-bounce), left 1s step-end; }
+:target-within > .go { background: rgba(255, 255, 255, 0); color: rgba(0, 0, 0, 0); left: 9999vmin; transition: background 0.6s, translate 2s, left step-end 1s; }
+.target-within > .go { background: rgba(255, 255, 255, 0); color: rgba(0, 0, 0, 0); left: 9999vmin; transition: background 0.6s, translate 2s, left step-end 1s; }
+:target-within > .go::before { opacity: 0.6; background: rgba(255, 255, 255, 0); color: rgba(0, 0, 0, 0); left: 9999vmin; }
+.target-within:target > .go::before {
+    transition: background 0.6s linear, transform linear 1s, left 1s step-end, opacity 0.6s linear;
+    background: red; color: black; mask-image: none; border: thin solid black;
+    padding: 0; top: 0; left: -9999vmin; right: unset;
+    position: fixed; width: auto; height: auto;
+    content: '← back' attr(href);
+    opacity: 0;
+}
+:target-within > .go::after { --distance: calc(0 - var(--width)) !important; left: 9999vmin; transition: background 0.6s var(--ease-out-bounce), transform 1s var(--ease-out-bounce), left 1s step-end, opacity 1s step-end; }
+.target-within > .go::after { --distance: calc(0 - var(--width)) !important; left: 9999vmin; transition: background 0.6s var(--ease-out-bounce), transform 1s var(--ease-out-bounce), left 1s step-end, opacity 1s step-end; }
+.target-within:not(:target) > .go::before {
+    animation: 1s anim 1s;
+    transition: background 0.6s, transform 1s, left 1s step-end;
+    background: red; color: black; mask-image: none; border: thin solid black;
+    padding: 0; top: 0; left: -9999vmin; right: unset;
+    position: fixed; width: auto; height: auto;
+    content: '← back' attr(href);
+    opacity: 0.9;
+}
+@keyframes anim {
+ 0% { opacity: 0; }
+ 100% { opacity: 0.9; }
+}
+@keyframes animout {
+ 0% { opacity: 0.9; }
+ 50% { opacity: 0; }
+ 100% { opacity: 1; }
+}
+/** { transition: all 2s step-end 1000s !important; }*/
+
+.target-within:not(:target) > .go { /*font-size: 1%;*/ width: 0; height: 0; border: none; background: none; color: transparent; outline: none; }
 .go:hover::after { --distance: calc(var(--min-distance) + var(--shift)); background-position-x: 25%; /* don't go to 100% because the easing goes beyond the value */ }
 .go::after {
     --width: 10; /* vmin */
@@ -209,10 +237,6 @@ html, body { height: 100%; }
     */
 }
 
-@keyframes trans { 
-    0% { background: rgba(214, 93, 184, 0.719); }
- }
-
 .rest { position: absolute; top: 0; left: 0; bottom: 0; right: 0;}
 .scene:target-within:not(:target) > .room.room-test:not(:target-within) { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
 .scene.target-within:not(:target) > .room.room-test:not(.target-within) { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
@@ -224,7 +248,7 @@ html, body { height: 100%; }
 .object:target-within:before { opacity: 1; }
 .object.target-within:before { opacity: 1; }
 .object:before {
-    content: "← back";
+    content: normal;/*"← back"; for hover only*/
     border: thin solid brown;
     background: white;
     z-index: 999;

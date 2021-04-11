@@ -35,6 +35,27 @@ html, body { width: 100%; height: 100%; overflow: hidden; }
     background: blue;
  }
 
+ .css3d :hover { opacity: 0.7; }
+
+ .css3d #a { pointer-events: none; }
+ .css3d #a * { pointer-events: all; }
+ .css3d #a:target { pointer-events: all; }
+ .css3d #a:hover { pointer-events: all; width: 70%; }
+ .css3d #a2 { left: 70%; }
+ .css3d #detector {
+	z-index: 1000; position: absolute; top: 0; bottom: 0; height: 0; width: 100%; height: 100%;
+	background: transparent; border: 10px solid rgba(100,1,0,0.4);
+	pointer-events: painted;
+}
+.css3d #detector:hover {
+    left: -100%;
+    transition: none;
+}
+.css3d #detector {
+    left: 100%;
+    transition: left 60s step-end;
+}
+
 .css3d iframe { width: 50%; height: 50%; }
 
 .css3d div:focus-within {

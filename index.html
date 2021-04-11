@@ -12,6 +12,7 @@
     <h2>Procedural Designer</h2>
     <p>Latest version of my <a href="https://jsmaniac.github.io/phc-thesis/phc-thesis/">Ph.D draft</a></p>
     <div class="css3d" style="display: none;">
+        <div id="detector"></div>
         <div tabindex="0" id="a">
             A
             <div tabindex="0" id="a1">
@@ -23,11 +24,12 @@
             </div>
         </div>
         <div tabindex="0" id="b">
-            B
+            B<a href="#a">goto a</a><a href="#b">goto b</a>
         </div>
     </div>
-    <div class="view3d" style="display:one">
-        <div class="scene">
+    <div class="view3d" style="display: one">
+        <div class="scene" id="main">
+            <a class="go" href="#main">→ Enter ←</a>
             <div class="rest"></div>
             <div tabindex="0" class="three-d room hover room-test">
                 <div class="three-d object test" id="hello">Hello world

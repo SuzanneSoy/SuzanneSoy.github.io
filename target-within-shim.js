@@ -6,20 +6,26 @@ function toggle(element, className, enable) {
     element.className = newcls.join(' ');
 }
 
-function targetWithin(id, enable) {
+function reverseAncestorsAndSelf(id) {
+    ancestorsAndSelf = [];
     if (id) {
         for (var e = document.getElementById(id); e; e = e.parentElement) {
-            toggle(e, 'target-within', enable)
+            ancestorsAndSelf[ancestorsAndSelf.length] = e;
         }
     }
+    return ancestorsAndSelf.reverse();
 }
 
-var current_hash = window.location.hash.substr(1);
+var current_hash = '';
 
 function hashChange() {
-    targetWithin(current_hash, false);
+    var oldElements = reverseAncestorsAndSelf(current_hash);
     current_hash = window.location.hash.substr(1);
-    targetWithin(current_hash, true);
+    var newElements = reverseAncestorsAndSelf(current_hash);
+    var i = 0;
+    while (i < oldElements.length && i < newElements.length && oldElements[i] == newElements[i]) { i++; }
+    for (var j = i; j < oldElements.length; j++) { toggle(oldElements[j], 'target-within', false); }
+    for (var j = i; j < newElements.length; j++) { toggle(newElements[j], 'target-within', true); }
 }
 
 window.addEventListener('load', hashChange, false);
