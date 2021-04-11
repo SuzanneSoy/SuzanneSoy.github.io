@@ -34,7 +34,7 @@ html, body { height: 100%; }
 
 .three-d {
     position: absolute;
-    transition: transform ease 2s;
+    transition: transform ease 20s;
     transform-style: preserve-3d;
     top: 50%;
     left: 50%;
@@ -106,9 +106,9 @@ html, body { height: 100%; }
 .room { transform: translate3d(0,0,0) rotate(0); }
 .room-test:target-within ~ .room { transform: var(--origin) var(--test-hover) var(--test-) var(--origin-); }
 .room-test.target-within ~ .room { transform: var(--origin) var(--test-hover) var(--test-) var(--origin-); }
-.room-test:target-within ~ .room .test2 { opacity: 0; left: 9999vmin; transition: translate 2s, opacity 1s, left step-end 1s; }
-.room-test.target-within ~ .room .test2 { opacity: 0; left: 9999vmin; transition: translate 2s, opacity 1s, left step-end 1s; }
-.room .test2 { transition: transform ease 2s, opacity 1s linear 1s, left step-end 1s; }
+.room-test:target-within ~ .room .test2 { opacity: 0; left: 9999vmin; transition: translate 20s, opacity 1s, left step-end 1s; }
+.room-test.target-within ~ .room .test2 { opacity: 0; left: 9999vmin; transition: translate 20s, opacity 1s, left step-end 1s; }
+.room .test2 { transition: transform ease 20s, opacity 1s linear 1s, left step-end 1s; }
 .room-test2:target-within ~ .room { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
 .room-test2.target-within ~ .room { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
 
@@ -133,41 +133,39 @@ html, body { height: 100%; }
 .go { background: rgba(255, 255, 255, 0.6); color: black; text-decoration: none; z-index: 100; font-size: calc(130% / var(--scale));
       outline: thin solid white;
       position: absolute; top: 0; bottom: 0; left:0; right: 0; display: flex; align-items: center; justify-content: center;
-      transition: background 0.6s, translate 2s, left step-start 1s; transform-style: preserve-3d; }
-.go::before { position: absolute; content: ''; left: 0; right: 0; height: 1.5em; z-index: -1;
-              background: blueviolet; transition: background 0.2s; }
+      transition: background 6s, translate 20s, left step-start 10s; transform-style: preserve-3d; }
+.go::before { position: fixed; content: 'before'; left: 0; right: 0; height: 1.5em; z-index: -1;
+              background: blueviolet; transition: background 2s;
+              top: 50%; }
 .go:hover::before { background: rgba(255, 255, 255, 0.6); }
 .go:hover { background: rgba(255, 255, 255, 0.1); }
-:target-within > .go { background: rgba(255, 255, 255, 0); color: rgba(0, 0, 0, 0); left: 9999vmin; transition: background 0.6s, translate 2s, left step-end 1s; }
-.target-within > .go { background: rgba(255, 255, 255, 0); color: rgba(0, 0, 0, 0); left: 9999vmin; transition: background 0.6s, translate 2s, left step-end 1s; }
+:target-within > .go { background: rgba(255, 255, 255, 0); color: rgba(0, 0, 0, 0); left: 9999vmin; transition: background 6s, translate 2s, left step-end 10s; }
+.target-within > .go { background: rgba(255, 255, 255, 0); color: rgba(0, 0, 0, 0); left: 9999vmin; transition: background 6s, translate 2s, left step-end 10s; }
 :target-within > .go::before { opacity: 0.6; background: rgba(255, 255, 255, 0); color: rgba(0, 0, 0, 0); left: 9999vmin; }
 .target-within:target > .go::before {
-    transition: background 0.6s linear, transform linear 1s, left 1s step-end, opacity 0.6s linear;
-    background: red; color: black; mask-image: none; border: thin solid black;
-    padding: 0; top: 0; left: -9999vmin; right: unset;
+    /*transition: background 0.6s linear, transform linear 1s, top 1s step-end, left 1s step-end, opacity 0.6s linear;*/
+    transition: all step-end 10s, background 5s linear 5s, color 5s linear 5s, border 5s linear 5s, opacity 5s linear 5s, top 5s linear 5s;
+    background: red; color: black; border: thin solid black;
+    top: 0; left: -9999vmin; right: unset;
     position: fixed; width: auto; height: auto;
-    content: '← back' attr(href);
-    opacity: 0;
+    content: '← back (:target)' attr(href);
+    opacity: 0.4;
+    /*padding: 0;mask-image: none;*/
 }
-:target-within > .go::after { --distance: calc(0 - var(--width)) !important; left: 9999vmin; transition: background 0.6s var(--ease-out-bounce), transform 1s var(--ease-out-bounce), left 1s step-end, opacity 1s step-end; }
-.target-within > .go::after { --distance: calc(0 - var(--width)) !important; left: 9999vmin; transition: background 0.6s var(--ease-out-bounce), transform 1s var(--ease-out-bounce), left 1s step-end, opacity 1s step-end; }
+:target-within > .go::after { --distance: calc(0 - var(--width)) !important; left: 9999vmin; transition: background 6s var(--ease-out-bounce), transform 10s var(--ease-out-bounce), left 10s step-end, opacity 10s step-end; }
+.target-within > .go::after { --distance: calc(0 - var(--width)) !important; left: 9999vmin; transition: background 6s var(--ease-out-bounce), transform 10s var(--ease-out-bounce), left 10s step-end, opacity 10s step-end; }
 .target-within:not(:target) > .go::before {
-    animation: 1s anim 1s;
-    transition: background 0.6s, transform 1s, left 1s step-end;
-    background: red; color: black; mask-image: none; border: thin solid black;
-    padding: 0; top: 0; left: -9999vmin; right: unset;
+    transition: background 6s, transform 10s linear 10s, left 10s step-end, opacity 10s;
+    background: red; color: black; border: thin solid black;
+    top: 0; left: -9999vmin; right: auto;
     position: fixed; width: auto; height: auto;
-    content: '← back' attr(href);
-    opacity: 0.9;
+    content: '← back (:not:taget)' attr(href);
+    opacity: 0.8;
+    /*padding: 0;mask-image: none;*/
 }
 @keyframes anim {
- 0% { opacity: 0; }
+ 0% { opacity: 0.4; }
  100% { opacity: 0.9; }
-}
-@keyframes animout {
- 0% { opacity: 0.9; }
- 50% { opacity: 0; }
- 100% { opacity: 1; }
 }
 /** { transition: all 2s step-end 1000s !important; }*/
 
@@ -183,7 +181,7 @@ html, body { height: 100%; }
     --arrow-width-ratio: calc(var(--width) / (var(--width) + var(--border)));
     position: absolute; content: ''; top:50%; left: 50%; width: calc(var(--width) * 1vmin); height: calc(10vmin / var(--scale));
     --ease-out-bounce: cubic-bezier(0.3, 1.8, 0.9, 0.9);
-    transition: background 0.6s var(--ease-out-bounce), transform 1s var(--ease-out-bounce), left 1s step-start;
+    transition: background 6s var(--ease-out-bounce), transform 10s var(--ease-out-bounce), left 10s step-start;
     transform: translate3d(-50%, -50%, var(--z)) rotateY(45deg);
     --arrow-thickness: 20%;
     --arrowhead-position: 60%;
@@ -240,10 +238,10 @@ html, body { height: 100%; }
 .rest { position: absolute; top: 0; left: 0; bottom: 0; right: 0;}
 .scene:target-within:not(:target) > .room.room-test:not(:target-within) { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
 .scene.target-within:not(:target) > .room.room-test:not(.target-within) { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
-.scene:target-within:not(:target) > .room:not(:target-within) .test { opacity: 0; left: 999px; transition: translate 2s, opacity 1s, left step-end 1s; }
-.scene.target-within:not(:target) > .room:not(.target-within) .test { opacity: 0; left: 999px; transition: translate 2s, opacity 1s, left step-end 1s; }
+.scene:target-within:not(:target) > .room:not(:target-within) .test { opacity: 0; left: 999px; transition: translate 20s, opacity 10s, left step-end 10s; }
+.scene.target-within:not(:target) > .room:not(.target-within) .test { opacity: 0; left: 999px; transition: translate 20s, opacity 10s, left step-end 10s; }
 
-.room .test { transition: transform ease 2s, opacity 1s linear 1s, left step-end 1s; }
+.room .test { transition: transform ease 20s, opacity 10s linear 10s, left step-end 10s; }
 
 .object:target-within:before { opacity: 1; }
 .object.target-within:before { opacity: 1; }
@@ -255,6 +253,6 @@ html, body { height: 100%; }
     position: absolute;
     transform: translate3d(0, -100%, 0);
     opacity: 0;
-    transition: opacity 1s linear 1s;
+    transition: opacity 10s linear 10s;
     pointer-events: none;
 }
