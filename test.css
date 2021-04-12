@@ -134,52 +134,66 @@ html, body { height: 100%; }
 .go {
     background: rgba(255, 255, 255, 0.6); color: black; text-decoration: none; outline: thin solid white;
     /*mask-image: linear-gradient(rgba(0, 0, 0, 0.6) calc(50% - 0.75em), black calc(50% - 0.75em), black calc(50% + 0.75em), rgba(0, 0, 0, 0.6) calc(50% + 0.75em));*/
-    display: flex; align-items: center; justify-content: center; font-size: calc(130% / var(--scale)); transform-style: preserve-3d;
-    position: absolute; top: 0; left: 0; min-width: max-content; width: 100%; min-height: 1.5em; height: 100%; z-index: 100;
-    /*transition: background 2s, width 1s step-start, height 1s step-start; */
+    font-size: calc(130% / var(--scale)); transform-style: preserve-3d; z-index: 100;
+    line-height: 1.5em; text-align: center; position: absolute; top: 0; left: 0; width: auto; min-width: 100%; min-height: 1.5em;
+    /* trick to center the text position: absolute in the ::before, since we might want to animate this */
+    /*padding-top: calc(50% - 1.5em - (1.5em / 2)); height: calc(100% - (50% - 1.5em - (1.5em / 2)));*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100% - 1.5em);
+    padding-bottom: 1.5em;
     transition: var(--transition-to-forward);
+    flex-wrap: wrap;
+    flex-direction: row;
 }
+/*
+mask-image: glitches, hides the 3D transform in Chromium
+flex column: can't get 100% width;
+flex row: incorrect order in back buttons;
+bg gradient + opacity: opacity breaks 3D transforms
+padding: works for squares but is relative to height
+padding + direction: wrong dir for text
+*/
+
 /* semi-transparent on hover */
 .go:hover { background: rgba(255, 255, 255, 0.1); }
 
-/* White band behind text */
-:not(.target-within) > .go::before,
-:target > .go::before {
-    background: white; color: white; opacity: 1;
-    position: fixed; z-index: -1; left: 0; top: calc(50% - 0.75em); width: 100%; min-width: auto; height: auto; line-height: 1.5em;
-    color: transparent; /* hide the "← back to …" text */ /* todo: width 0 */
-
-    transition: var(--transition-to-forward);
-}
-
-/* white band semi-transparent on hover */
-:not(.target-within) > .go:hover::before { background: rgba(255, 255, 255, 0.6); }
-
 /* link is displayed in top left corner when the link goes out of the current room */
-.target-within:not(:target) > .go {
+/* back */ .target-within:not(:target) > .go {
     border: thin solid black; background: white; color: black; outline: thin solid rgba(255,255,255,0);
-    width: 0%; height: 0%; font-size: 1rem;
+    min-width: 0%; height: 0%; font-size: 1rem; padding-bottom: 0;
     /*transition: background 2s, width 1s step-start, height 1s step-start;*/
     transition: var(--transition-to-back);
 }
 
 .go {
-    --transition-to-forward: background 2s linear, color 2s linear, border 2s linear, outline 2s linear, opacity 2s linear, width 1s step-start, height 1s step-start;
-    --transition-to-current: background 2s linear, color 2s linear, border 2s linear, outline 2s linear, opacity 2s linear, width 2s linear 1s,   height 2s step-end;
-    --transition-to-back:    background 2s linear, color 2s linear, border 2s linear, outline 2s linear, opacity 2s linear, width 1s step-start, height 1s step-start;
+    --transition-to-forward: background 2s linear, color 2s linear, border 2s linear, outline 2s linear, opacity 2s linear, min-width 1s step-start, height 1s step-start, padding-bottom 1s step-start, font-size 1.1s step-start, top 1s step-start;
+    --transition-to-current: background 2s linear, color 2s linear, border 2s linear, outline 2s linear, opacity 2s linear, min-width 2s step-end,   height 2s step-end,   padding-bottom 2s step-end,   font-size 2.2s step-end,   top 2s step-end;
+    --transition-to-back:    background 2s linear, color 2s linear, border 2s linear, outline 2s linear, opacity 2s linear, min-width 1s step-start, height 1s step-start, padding-bottom 1s step-start, font-size 1.3s step-start, top 1s step-start;
 }
 
 /* ← back to … when the link goes out of the current room. To be able to animate it, the content is always there, and the colour changes. */
-.target-within:not(:target) > .go::before { color: black; transition: var(--transition-to-back); }
-.go::before { content: '← back to '; }
+.go::before {
+    content: '← back to ';
+    display: inline-block; position: relative; left: 0; width: auto; height: 1.5em; line-height: 1.5em;
+}
+/* back */ .target-within:not(:target) > .go::before {
+    background: transparent; color: black; top: 0; min-width: 0; transition: var(--transition-to-back); }
+/* current */ :target > .go::before {
+    background: transparent; color:transparent; z-index: -1; top: 50%; min-width: 100%; transition: var(--transition-to-current); }
+/* forward: White band behind text */
+:not(.target-within) > .go::before {
+    background: white; color:transparent; z-index: -1; top: 50%; min-width: 100%; transition: var(--transition-to-forward); }
 
-/* debug */
-:target > .go::before { transition: var(--transition-to-current); }
-:target > .go::before { background: purple; }
+/* white band semi-transparent on hover */
+:not(.target-within) > .go:hover::before { background: rgba(255, 255, 255, 0.6); }
+
+
 
 /* disable the link when it points to the current room */
 /*:target > .go { background: rgba(255,0,0,0.1); color: rgba(0,0,0,0.1); border: thin solid rgba(0,0,255,1); outline-color: rgba(0,255,0,0.1); pointer-events: none; transition: var(--transition-to-current); }*/
-:target > .go { background: transparent; color: transparent; border: thin solid transparent; outline-color: transparent; pointer-events: none; transition: var(--transition-to-current); }
+:target > .go { font-size: 1rem; background: transparent; color: transparent; border: thin solid transparent; outline-color: transparent; pointer-events: none; transition: var(--transition-to-current); }
 
 /* animate colourful arrow and disable it when the target is in a nested room */
 :target-within > .go::after { --distance: calc(0 - var(--width)) !important; pointer-events: none; transition: background 6s var(--ease-out-bounce), transform 10s var(--ease-out-bounce), left 10s step-end, opacity 10s step-end; }
@@ -220,53 +234,6 @@ html, body { height: 100%; }
     -webkit-mask-image: var(--mask-image);
     mask-composite: intersect, add;
     -webkit-mask-composite: destination-in, source-over;
-}
-
-
-.comment.target-within:target > .go::before {
-    /*transition: background 0.6s linear, transform linear 1s, top 1s step-end, left 1s step-end, opacity 0.6s linear;*/
-    content: '← back (:target)' attr(href);
-    background: red; color: black; border: thin solid black;
-    top: 0; 
-    opacity: 0;
-    transition: /*all step-end 10s,*/
-        background 5s linear 5s,
-        color 5s linear 5s,
-        border 5s linear 5s,
-        opacity 1s linear 1s,
-        top 5s linear 5s,
-        width 5s linear 5s,
-        min-height step-end 5s; /* delay needed to keep the band the same height as it disappears */;
-
-    min-width: max-content; width: 0%;
-    min-height: 0;
-    z-index: 1;
-    /*height: auto;position: fixed; padding: 0;mask-image: none; right: unset; width: auto; left: -9999vmin; */
-}
-.comment.target-within:not(:target) > .go::before {
-    /*transition: background 6s, transform 10s linear 10s, left 10s step-end, opacity 10s;*/
-    background: /*green*/ transparent; color: black; border: /*thin solid black*/ none;
-    top: 0;
-    /*position: fixed; width: auto;*/ height: auto;
-    content: '← back to ';
-    opacity: 0.8;
-    
-    transition: /*all step-end 10s,*/
-        background 5s linear 5s,
-        color 5s linear 5s,
-        border 5s linear 5s,
-        opacity 1s linear 1s,
-        top 5s linear 5s,
-        width 5s linear 5s,
-        height 5s linear 5s;
-
-    min-width: max-content; width: 0%;
-    min-height: 0;
-    z-index: 1;
-    /*left: -9999vmin;right: auto; padding: 0;mask-image: none;*/
-    display: inline-block;
-    position: relative;
-    font-size: 1rem;
 }
 
 .rest { display: none; }
