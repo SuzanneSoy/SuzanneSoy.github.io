@@ -34,7 +34,7 @@ html, body { height: 100%; }
 
 .three-d {
     position: absolute;
-    transition: transform ease 20s;
+    transition: transform ease 2s;
     transform-style: preserve-3d;
     top: 50%;
     left: 50%;
@@ -86,8 +86,8 @@ html, body { height: 100%; }
 .hover.target-within .hover.target-within { z-index: 50; }
 
 .wall-l { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(-50vmin, 0, 0) rotateY(90deg); }
-.wall-r { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(50vmin, 0, 0)  rotateY(90deg); }
-.wall-u { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(0, -50vmin, 0) rotateX(90deg); }
+.wall-r { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(50vmin, 0, 0)  rotateY(-90deg); }
+.wall-u { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(0, -50vmin, 0) rotateX(-90deg); }
 .wall-d { opacity: 0.7; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(0, 50vmin, 0)  rotateX(90deg); }
 .wall-b { opacity: 0.3; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(0, 0, -50vmin); }
 .wall-f { opacity: 0.1; background: var(--rainbow); width: 100vmin; height: 100vmin; transform: var(--origin) translate3d(0, 0, 50vmin);
@@ -106,9 +106,12 @@ html, body { height: 100%; }
 .room { transform: translate3d(0,0,0) rotate(0); }
 .room-test:target-within ~ .room { transform: var(--origin) var(--test-hover) var(--test-) var(--origin-); }
 .room-test.target-within ~ .room { transform: var(--origin) var(--test-hover) var(--test-) var(--origin-); }
-.room-test:target-within ~ .room .test2 { opacity: 0; left: 9999vmin; transition: translate 20s, opacity 1s, left step-end 1s; }
-.room-test.target-within ~ .room .test2 { opacity: 0; left: 9999vmin; transition: translate 20s, opacity 1s, left step-end 1s; }
-.room .test2 { transition: transform ease 20s, opacity 1s linear 1s, left step-end 1s; }
+.room-test:target-within ~ .room .test2 { opacity: 0; pointer-events: none; transition: translate 2s, opacity 1s, left step-end 1s; }
+.room-test.target-within ~ .room .test2 { opacity: 0; pointer-events: none; transition: translate 2s, opacity 1s, left step-end 1s; }
+.scene:target-within:not(:target) > .room:not(:target-within) .test { opacity: 0; pointer-events: none; transition: translate 2s, opacity 1s, left step-end 1s; }
+.scene.target-within:not(:target) > .room:not(.target-within) .test { opacity: 0; pointer-events: none; transition: translate 2s, opacity 1s, left step-end 1s; }
+.room .test2 { transition: transform ease 2s, opacity 1s linear 1s, left step-end 1s; }
+.room .test { transition: transform ease 2s, opacity 1s linear 1s, left step-end 1s; }
 .room-test2:target-within ~ .room { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
 .room-test2.target-within ~ .room { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
 
@@ -168,9 +171,10 @@ padding + direction: wrong dir for text
 }
 
 .go {
-    --transition-to-forward: background 2s linear, color 2s linear, border 2s linear, outline 2s linear, opacity 2s linear, min-width 1s step-start, height 1s step-start, padding-bottom 1s step-start, font-size 1.1s step-start, top 1s step-start;
-    --transition-to-current: background 2s linear, color 2s linear, border 2s linear, outline 2s linear, opacity 2s linear, min-width 2s step-end,   height 2s step-end,   padding-bottom 2s step-end,   font-size 2.2s step-end,   top 2s step-end;
-    --transition-to-back:    background 2s linear, color 2s linear, border 2s linear, outline 2s linear, opacity 2s linear, min-width 1s step-start, height 1s step-start, padding-bottom 1s step-start, font-size 1.3s step-start, top 1s step-start;
+    --transition-duration: 0.6s;
+    --transition-to-forward: background var(--transition-duration) linear, color var(--transition-duration) linear, border var(--transition-duration) linear, outline var(--transition-duration) linear, opacity var(--transition-duration) linear, min-width 1s step-start, height 1s step-start, padding-bottom 1s step-start, font-size 1s step-start, top 1s step-start;
+    --transition-to-current: background var(--transition-duration) linear, color var(--transition-duration) linear, border var(--transition-duration) linear, outline var(--transition-duration) linear, opacity var(--transition-duration) linear, min-width var(--transition-duration) step-end,   height var(--transition-duration) step-end,   padding-bottom var(--transition-duration) step-end,   font-size var(--transition-duration) step-end,   top var(--transition-duration) step-end;
+    --transition-to-back:    background var(--transition-duration) linear, color var(--transition-duration) linear, border var(--transition-duration) linear, outline var(--transition-duration) linear, opacity var(--transition-duration) linear, min-width 1s step-start, height 1s step-start, padding-bottom 1s step-start, font-size 1s step-start, top 1s step-start;
 }
 
 /* ← back to … when the link goes out of the current room. To be able to animate it, the content is always there, and the colour changes. */
@@ -178,6 +182,10 @@ padding + direction: wrong dir for text
     content: '← back to ';
     display: inline-block; position: relative; left: 0; width: auto; height: 1.5em; line-height: 1.5em;
 }
+#main > .go::before { content: '← back to start'; }
+#main.target-within:not(:target) > .go { color: transparent; background: transparent; border-color: transparent; border-width: 0; }
+#main.target-within:not(:target) > .go::before { border: thin solid black; background: white; }
+#main.target-within > .go { border-width: 0; }
 /* back */ .target-within:not(:target) > .go::before {
     background: transparent; color: black; top: 0; min-width: 0; transition: var(--transition-to-back); }
 /* current */ :target > .go::before {
@@ -196,8 +204,8 @@ padding + direction: wrong dir for text
 :target > .go { font-size: 1rem; background: transparent; color: transparent; border: thin solid transparent; outline-color: transparent; pointer-events: none; transition: var(--transition-to-current); }
 
 /* animate colourful arrow and disable it when the target is in a nested room */
-:target-within > .go::after { --distance: calc(0 - var(--width)) !important; pointer-events: none; transition: background 6s var(--ease-out-bounce), transform 10s var(--ease-out-bounce), left 10s step-end, opacity 10s step-end; }
-.target-within > .go::after { --distance: calc(0 - var(--width)) !important; pointer-events: none; transition: background 6s var(--ease-out-bounce), transform 10s var(--ease-out-bounce), left 10s step-end, opacity 10s step-end; }
+:target-within > .go::after { --distance: calc(0 - var(--width)) !important; pointer-events: none; transition: background 0.6s var(--ease-out-bounce), transform 1s var(--ease-out-bounce), left 1s step-end, opacity 1s step-end; }
+.target-within > .go::after { --distance: calc(0 - var(--width)) !important; pointer-events: none; transition: background 0.6s var(--ease-out-bounce), transform 1s var(--ease-out-bounce), left 1s step-end, opacity 1s step-end; }
 
 /* animate position and gradient of colourful arrow on hover */
 .go:hover::after { --distance: calc(var(--min-distance) + var(--shift)); background-position-x: 25%; /* leave 25% for bounce easing */ }
@@ -213,7 +221,7 @@ padding + direction: wrong dir for text
     --arrow-width-ratio: calc(var(--width) / (var(--width) + var(--border)));
     position: absolute; content: ''; top:50%; left: 50%; width: calc(var(--width) * 1vmin); height: calc(10vmin / var(--scale));
     --ease-out-bounce: cubic-bezier(0.3, 1.8, 0.9, 0.9);
-    transition: background 6s var(--ease-out-bounce), transform 10s var(--ease-out-bounce), left 10s step-start;
+    transition: background 0.6s var(--ease-out-bounce), transform 1s var(--ease-out-bounce), left 1s step-start, opacity 1s linear 2s /* when coming back from a sibblign room, wait till our room is visible before showing opacity */;
     transform: translate3d(-50%, -50%, var(--z)) rotateY(45deg);
     --arrow-thickness: 20%;
     --arrowhead-position: 60%;
@@ -236,14 +244,14 @@ padding + direction: wrong dir for text
     -webkit-mask-composite: destination-in, source-over;
 }
 
+/* Hide glitch where opacity on the parent breaks 3D even if the opacity is still at 1 during the first part of the animation. */
+.room-test.target-within ~ .room .go::after { opacity: 0; transition: opacity 1s step-start; }
+.scene.target-within:not(:target) > .room:not(.target-within) .go::after { opacity: 0; transition: opacity 1s step-start; }
+
 .rest { display: none; }
 .hover-anim .rest { position: absolute; top: 0; left: 0; bottom: 0; right: 0; }
 .scene:target-within:not(:target) > .room.room-test:not(:target-within) { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
 .scene.target-within:not(:target) > .room.room-test:not(.target-within) { transform: var(--origin) var(--test2-hover) var(--test2-) var(--origin-); }
-.scene:target-within:not(:target) > .room:not(:target-within) .test { opacity: 0; left: 999px; transition: translate 20s, opacity 10s, left step-end 10s; }
-.scene.target-within:not(:target) > .room:not(.target-within) .test { opacity: 0; left: 999px; transition: translate 20s, opacity 10s, left step-end 10s; }
-
-.room .test { transition: transform ease 20s, opacity 10s linear 10s, left step-end 10s; }
 
 .object:target-within:before { opacity: 1; }
 .object.target-within:before { opacity: 1; }
@@ -255,6 +263,6 @@ padding + direction: wrong dir for text
     position: absolute;
     transform: translate3d(0, -100%, 0);
     opacity: 0;
-    transition: opacity 10s linear 10s;
+    transition: opacity 1s linear 1s;
     pointer-events: none;
 }
