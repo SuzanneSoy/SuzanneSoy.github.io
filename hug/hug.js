@@ -170,14 +170,21 @@ var pauseKiss = 0;
 var mouse = { x: 0, y: 0 }
 var timeout = false;
 var kisses = 0;
+var freeHearts = [];
 
 function muah() { kiss++; if (kiss >= max()) { pauseKiss = Date.now() + 3000; window.clearTimeout(timeout); nextSession(); } else { cuddle(); } }
 function blowKiss(e) {
     if (Date.now() > pauseKiss) {
         var heart = document.createElement('div');
-        hearts.appendChild(heart);
+        var free = freeHearts.shift();
+        if (free) {
+            free.replaceWith(heart)
+        } else {
+            hearts.appendChild(heart);
+        }
         var emojis = ['❤️', '♥️', '💗', '<3', '💖', '💛', '💙', '💜', '💚', '💞', '💝', '💌', '💕'];
         heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        heart.style.fontFamily = (heart.innerText == '<3') ? 'monospace' : "'Noto Color Emoji', monospace";
         heart.style.position = 'absolute';
         heart.style.top = mouse.y + 'px';
         heart.style.left = mouse.x + 'px';
@@ -189,6 +196,7 @@ function blowKiss(e) {
             kisses = 0;
         }
         timeout = window.setTimeout(blowKiss, 300 + Math.random() * 700)
+        window.setTimeout(function() { freeHearts.push(heart); }, 5100);
     } else {
         timeout = window.setTimeout(blowKiss, pauseKiss - Date.now() + 100);
     }

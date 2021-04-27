@@ -15,7 +15,7 @@
             td.mini { vertical-align: top; }
             td.next { cursor: pointer; filter: grayscale(100%) brightness(100%) blur(0.3em); }
             td.next:hover { cursor: pointer; filter: grayscale(0%) brightness(100%) blur(0em); }
-            #hearts * { color: pink; font-weight: bold; font-family: monospace; opacity: 0; }
+            #hearts * { color: pink; font-weight: bold; font-family: 'Noto Color Emoji', monospace; opacity: 0; }
             #hearts :nth-child(3n+0) { animation: flutter0 3s linear; }
             #hearts :nth-child(3n+1) { animation: flutter1 3.2s linear; }
             #hearts :nth-child(3n+2) { animation: flutter2 3.3s linear; }
@@ -64,6 +64,11 @@
                 font-family: monospace;
                 color: pink;
                 text-align: center;
+            }
+            td { font-family: 'Noto Color Emoji'; }
+            @font-face {
+                font-family: 'Noto Color Emoji';
+                src: url(https://gitcdn.xyz/repo/googlefonts/noto-emoji/master/fonts/NotoColorEmoji.ttf);
             }
         </style>
     </head>
