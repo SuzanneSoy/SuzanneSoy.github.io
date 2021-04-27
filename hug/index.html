@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Hug?</title>
+        <style>
+            html, body { height: 100%; padding: 0; margin: 0; }
+            body { font-size: 2em; display: grid; justify-items: center; align-content: center; }
+            #main { }
+            table { transition: transform 3s cubic-bezier(1,0,0.5,1); transform-origin: top left; }
+            table, tr, td { border: none; padding: 0; }
+            td { position: relative; }
+            td { cursor: default; transition: filter 1s ease-in-out, opacity 1s ease-in-out; filter: grayscale(100%) brightness(50%) blur(0.3em); }
+            td.on { filter: grayscale(0%) brightness(100%) blur(0em); }
+            td.mini { vertical-align: top; }
+            td.next { cursor: pointer; filter: grayscale(100%) brightness(100%) blur(0.3em); }
+            td.next:hover { cursor: pointer; filter: grayscale(0%) brightness(100%) blur(0em); }
+            #hearts * { color: pink; font-weight: bold; font-family: monospace; opacity: 0; }
+            #hearts :nth-child(3n+0) { animation: flutter0 3s linear; }
+            #hearts :nth-child(3n+1) { animation: flutter1 3.2s linear; }
+            #hearts :nth-child(3n+2) { animation: flutter2 3.3s linear; }
+            #hearts { pointer-events: none; }
+            @keyframes flutter0 {
+                0%   { opacity: 0.9;   transform: translate( 0.00em,   0.00em) scale(1.00); }
+                10%  { opacity: 0.9;   transform: translate( 0.17em,  -1.36em) scale(1.46); }
+                20%  { opacity: 0.9;   transform: translate( 0.36em,  -2.64em) scale(1.55); }
+                30%  { opacity: 0.9;   transform: translate( 0.08em,  -3.84em) scale(1.09); }
+                40%  { opacity: 0.9;   transform: translate(-0.61em,  -4.96em) scale(0.47); }
+                50%  { opacity: 0.9;   transform: translate(-0.96em,  -6.00em) scale(0.28); }
+                60%  { opacity: 0.9;   transform: translate(-0.34em,  -6.96em) scale(0.78); }
+                70%  { opacity: 0.9;   transform: translate( 0.92em,  -7.84em) scale(1.56); }
+                80%  { opacity: 0.9;   transform: translate( 1.58em,  -8.64em) scale(1.89); }
+                90%  { opacity: 0.6; transform: translate( 0.74em,  -9.36em) scale(1.39); }
+                100% { opacity: 0;   transform: translate(-1.09em, -10.00em) scale(0); }
+            }
+            @keyframes flutter1 {
+                0%   { opacity: 0.9;   transform: translate( 0.00em,   0.00em) scale(1.00); }
+                10%  { opacity: 0.9;   transform: translate(-0.15em,  -1.64em) scale(1.46); }
+                20%  { opacity: 0.9;   transform: translate(-0.38em,  -3.16em) scale(1.55); }
+                30%  { opacity: 0.9;   transform: translate(-0.17em,  -4.56em) scale(1.09); }
+                40%  { opacity: 0.9;   transform: translate( 0.53em,  -5.84em) scale(0.47); }
+                50%  { opacity: 0.9;   transform: translate( 0.99em,  -7.00em) scale(0.28); }
+                60%  { opacity: 0.9;   transform: translate( 0.49em,  -8.04em) scale(0.78); }
+                70%  { opacity: 0.9;   transform: translate(-0.76em,  -8.96em) scale(1.56); }
+                80%  { opacity: 0.9;   transform: translate(-1.60em,  -9.76em) scale(1.89); }
+                90%  { opacity: 0.6; transform: translate(-0.97em, -10.44em) scale(1.39); }
+                100% { opacity: 0;   transform: translate( 0.84em, -11.00em) scale(0); }
+            }
+            @keyframes flutter2 {
+                0%   { opacity: 0.9;   transform: translate( 0.00em,  -0.00em) scale(1.00); }
+                10%  { opacity: 0.9;   transform: translate( 0.13em,  -1.17em) scale(1.46); }
+                20%  { opacity: 0.9;   transform: translate( 0.40em,  -2.28em) scale(1.55); }
+                30%  { opacity: 0.9;   transform: translate( 0.25em,  -3.33em) scale(1.09); }
+                40%  { opacity: 0.9;   transform: translate(-0.44em,  -4.32em) scale(0.47); }
+                50%  { opacity: 0.9;   transform: translate(-1.00em,  -5.25em) scale(0.28); }
+                60%  { opacity: 0.9;   transform: translate(-0.64em,  -6.12em) scale(0.78); }
+                70%  { opacity: 0.9;   transform: translate( 0.59em,  -6.93em) scale(1.56); }
+                80%  { opacity: 0.9;   transform: translate( 1.58em,  -7.68em) scale(1.89); }
+                90%  { opacity: 0.6; transform: translate( 1.17em,  -8.37em) scale(1.39); }
+                100% { opacity: 0;   transform: translate(-0.58em,  -9.00em) scale(0); }
+            }
+            #level {
+                font-size: 1.5rem;
+                font-family: monospace;
+                color: pink;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="level"></h1>
+        <div id="main"></div>
+        <div id="hearts"></div>
+        <script src="hug.js"></script>
+    </body>
+</html>
