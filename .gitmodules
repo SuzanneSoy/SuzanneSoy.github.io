@@ -1,6 +1,6 @@
 [submodule "table.js"]
 	path = table.js
 	url = https://github.com/jsmaniac/table.js
-[submodule "git-js-tutorial"]
-	path = git-js-tutorial
+[submodule "git-tutorial"]
+	path = git-tutorial
 	url = https://github.com/jsmaniac/git-js-tutorial
