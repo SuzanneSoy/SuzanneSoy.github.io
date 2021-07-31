@@ -1,3 +1,7 @@
+/* Temporary hack to place the main content above when the 3D stuff is not targetted */
+.view3d { z-index: 0; }
+.view3d.target-within { z-index: 2; }
+
 html { position: relative; padding:0; }
 html, body { height: 100%; }
 .view3d { width: 100%; height:100%; top: 0; left: 0; margin: 0; padding:0; /*overflow: hidden;*/ position: fixed; }
