@@ -30,7 +30,7 @@ echo "Connecting to some IPFS node..."
 
 echo "Pinning $h on the remote service..."
 (
-  ipfs pin remote add --service=my-remote-pin --name='site-suzanne.soy-'"$GITHUB_SHA" "$h"
+  ipfs pin remote add --service=my-remote-pin --name='site-suzanne.soy-'"$(TZ=UTC git log -1 --format=%cd --date=iso-strict-local HEAD)"-"$GITHUB_SHA" "$h"
 ) > /dev/null 2>&1
 echo "Finished pinning $h on the remote service"
 
