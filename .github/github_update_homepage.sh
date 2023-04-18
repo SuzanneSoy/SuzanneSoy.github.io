@@ -31,7 +31,7 @@ echo "Connecting to some IPFS node..."
 echo "Pinning $h on the remote service..."
 (
   ipfs pin remote add --service=my-remote-pin --name='site-suzanne.soy-'"$GITHUB_SHA" "$h"
-) # > /dev/null 2>&1
+) > /dev/null 2>&1
 echo "Finished pinning $h on the remote service"
 
 # Update Homepage URL on GitHub
